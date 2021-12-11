@@ -14,23 +14,18 @@
     </header>
     <main>
       <section class="question" id="prompt">
-        <h1>Welcome to the Coding Quiz</h1>
-        <p>
+        <h1 id="question-title">Welcome to the Coding Quiz</h1>
+        <p id="explanation">
           You will be asked a series of questions. You have sixty seconds to
           answer. Any wrong wrong answer will deduct fifteen seconds from your
           time. Good Luck!
         </p>
-        <button class="start" onclick="quiz()">Start!</button>
+        <button class="start" id="start" onclick="quiz()">Start!</button>
       </section>
     </main>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
-
-<!-- Inside which HTML element do we put the JavaScript?
-<script> 
-<js>
-<javascript> -->
 
 <!-- What is the correct way to connect an external js file to an HTML file"?
 <script src="....js"> 
@@ -44,7 +39,8 @@ prompt("Hello World"); -->
 
 <!-- True or False: All for and while loops can be expressed as a recursive function with an if statement?
 True
-False -->
+False
+Only for loops, not while loops -->
 
 <!-- What will be the outout of the following code? 
 console.log(5 + "6" + "4") 

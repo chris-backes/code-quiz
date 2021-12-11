@@ -5,6 +5,7 @@
   --color4: #6361f2;
   --color5: #5452cc;
   --startbtn: 25%;
+  --btnbtn: 50%;
 }
 * {
   font-family: "Courier New", Courier, monospace;
@@ -48,4 +49,16 @@ main {
   margin-bottom: 10px;
   margin-left: calc((100% - var(--startbtn)) / 2);
   margin-right: calc((100% - var(--startbtn)) / 2);
+}
+
+.btn {
+  color: white;
+  background-color: var(--color2);
+  font-size: 125%;
+  border-radius: 10px;
+  width: 50%;
+  height: 15%;
+  margin-bottom: 10px;
+  margin-left: calc((100% - var(--btnbtn)) / 2);
+  margin-right: calc((100% - var(--btnbtn)) / 2);
 }
