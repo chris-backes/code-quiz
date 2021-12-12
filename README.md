@@ -1,5 +1,11 @@
 # Code Quiz
 
+https://chris-backes.github.io/code-quiz/
+
+![Code Quiz Screenshot](./assets/images/screencapture.png)
+
+![Code Quiz Gif](./assets/images/code-quiz.gif)
+
 ## User Story
 
 ```
@@ -30,7 +36,7 @@ The webpage is made up of an HTML file, a CSS file, and a JavaScript file. The f
 
 ### HTML
 
-The HTML is only a single page, whose elements, excluding those on the landing page, are dynamically created in JavaScript.
+The HTML is two pages, whose elements, excluding those on the landing page of the index, are dynamically created in JavaScript.
 
 ### CSS
 
@@ -44,34 +50,4 @@ The first function starts a timer and calls the first question. The three button
 
 The high score page introduces a form for inputing initials. These initials will be stored with the score itself in the local storage.
 
-Grading Requirements
-This challenge is graded based on the following criteria:
-
-Technical Acceptance Criteria: 40%
-Satisfies all of the above acceptance criteria.
-Deployment: 32%
-Application deployed at live URL.
-
-Application loads with no errors.
-
-Application GitHub URL submitted.
-
-GitHub repository that contains application code.
-
-Application Quality: 15%
-Application user experience is intuitive and easy to navigate.
-
-Application user interface style is clean and polished.
-
-Application resembles the mock-up functionality provided in the Challenge instructions.
-
-Repository Quality: 13%
-Repository has a unique name.
-
-Repository follows best practices for file structure and naming conventions.
-
-Repository follows best practices for class/id naming conventions, indentation, high-quality comments, etc.
-
-Repository contains multiple descriptive commit messages.
-
-Repository contains a high-quality README file with description, screenshot, and link to deployed application.
+The scoring page is displayed on a second page, which is linked both in the upper left of the index and is automatically produced upon completing the form submitting the score. The contents of the page are a table of all the scores stored in local storage.

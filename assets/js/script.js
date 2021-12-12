@@ -10,6 +10,7 @@ let timeLeft = 60;
 let highScore = 0;
 var timeInterval;
 let i = 0;
+let allScores = [];
 
 let questionsArray = [
   {
@@ -48,7 +49,7 @@ let questionsArray = [
     right: "564",
   },
 ];
-
+//functions used in the course of creating and styling the quiz questions
 var answerCheck = function () {
   if (this.textContent === questionsArray[i].right) {
     document.querySelector(".right-wrong").innerHTML = "Correct!";
@@ -70,13 +71,13 @@ function eventsAndButtons(answerA, answerB, answerC) {
   responseContentTwo.setAttribute("class", "btn b");
   responseContentThree.setAttribute("class", "btn c");
 }
-
+//Is only called after question one becasue there is nothing to remove when question one is called
 function removeButtons() {
   responseContentOne.remove();
   responseContentTwo.remove();
   responseContentThree.remove();
 }
-
+//functions create and style question in the quiz
 var questionOne = function () {
   document.querySelector("#question-title").innerHTML =
     questionsArray[0].questionPrompt;
@@ -158,6 +159,22 @@ var questionFive = function () {
   document.querySelector(".b").addEventListener("click", endQuiz);
   document.querySelector(".c").addEventListener("click", endQuiz);
 };
+//Styles the scoring page, which automatically opens once the initials are entered
+function styleScorePage() {
+  allScores = JSON.parse(localStorage.getItem("scores"));
+  console.log(allScores);
+  for (let j = 0; j < allScores.length; j++) {
+    let tableEl = document.querySelector("#page-scores");
+    let tableRowEl = document.createElement("tr");
+    let tableHeadOneEl = document.createElement("th");
+    let tableHeadTwoEl = document.createElement("th");
+    tableEl.appendChild(tableRowEl);
+    tableHeadOneEl.textContent = allScores[j].name;
+    tableRowEl.appendChild(tableHeadOneEl);
+    tableHeadTwoEl.textContent = allScores[j].score;
+    tableRowEl.appendChild(tableHeadTwoEl);
+  }
+}
 //Quiz is over. This function starts the process of building the high score screen
 function endQuiz() {
   highScore = timeLeft;
@@ -187,7 +204,7 @@ function highScoreScreen() {
   saveScoreInputEl.setAttribute("type", "text");
   saveScoreInputEl.setAttribute("class", "text-field");
   saveScoreFormEl.appendChild(saveScoreInputEl);
-  //This is where I just made the change
+
   saveScoreSubmitEl.setAttribute("type", "button");
   saveScoreSubmitEl.setAttribute("value", "Save Score");
   saveScoreSubmitEl.setAttribute("class", "btn");
@@ -196,7 +213,6 @@ function highScoreScreen() {
 }
 
 function submitHighScore() {
-  let allScores = [];
   function loadScores() {
     let previousScores = JSON.parse(localStorage.getItem("scores"));
     if (!previousScores) {
@@ -206,20 +222,25 @@ function submitHighScore() {
       allScores.push(previousScores[j]);
     }
   }
-  loadScores();
-  if (saveScoreInputEl === "") {
-    saveScoreLabelEl.textContent = "Maybe try entering your initials, champ";
-  } else {
-    let newScore = {
-      name: saveScoreInputEl.value,
-      score: highScore,
-    };
-    allScores.push(newScore);
-    localStorage.setItem("scores", JSON.stringify(allScores));
 
-    window.location.href = "./highScores.html";
-    return false;
+  loadScores();
+  function logScores() {
+    if (saveScoreInputEl.value === "") {
+      saveScoreLabelEl.textContent = "Maybe try entering your initials, champ";
+      logScores();
+    } else {
+      let newScore = {
+        name: saveScoreInputEl.value,
+        score: highScore,
+      };
+      allScores.push(newScore);
+      localStorage.setItem("scores", JSON.stringify(allScores));
+      //directs user to high score page
+      window.location.href = "./highScores.html";
+      // styleScorePage();
+    }
   }
+  logScores();
 }
 
 //First function. Initiates quiz/timer
