@@ -187,39 +187,38 @@ function highScoreScreen() {
   saveScoreInputEl.setAttribute("type", "text");
   saveScoreInputEl.setAttribute("class", "text-field");
   saveScoreFormEl.appendChild(saveScoreInputEl);
-
-  saveScoreSubmitEl.setAttribute("type", "submit");
+  //This is where I just made the change
+  saveScoreSubmitEl.setAttribute("type", "button");
   saveScoreSubmitEl.setAttribute("value", "Save Score");
   saveScoreSubmitEl.setAttribute("class", "btn");
   saveScoreSubmitEl.setAttribute("onclick", "submitHighScore()");
   saveScoreFormEl.appendChild(saveScoreSubmitEl);
 }
 
-function loadScores() {
-  let previousScores = localStorage.getItem("scores");
-  if (!previousScores) {
-    return false;
-  }
-  previousScores = JSON.parse(previousScores);
-  allScores.push(previousScores);
-  console.log(allScores);
-}
-
 function submitHighScore() {
-  debugger;
   let allScores = [];
-  let newScore = [];
+  function loadScores() {
+    let previousScores = JSON.parse(localStorage.getItem("scores"));
+    if (!previousScores) {
+      return false;
+    }
+    for (let j = 0; j < previousScores.length; j++) {
+      allScores.push(previousScores[j]);
+    }
+  }
   loadScores();
   if (saveScoreInputEl === "") {
-    saveScoreLabelEl.textContent = "Maybe try entering your initials champ";
+    saveScoreLabelEl.textContent = "Maybe try entering your initials, champ";
   } else {
-    newScore = {
+    let newScore = {
       name: saveScoreInputEl.value,
       score: highScore,
     };
     allScores.push(newScore);
     localStorage.setItem("scores", JSON.stringify(allScores));
-    console.log(newScore);
+
+    window.location.href = "./highScores.html";
+    return false;
   }
 }
 

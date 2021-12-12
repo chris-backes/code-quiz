@@ -19,6 +19,10 @@ header p {
   color: var(--color3);
   font-weight: bolder;
 }
+header a {
+  text-decoration: none;
+  color: var(--color3);
+}
 main {
   position: absolute;
   top: 50%;
