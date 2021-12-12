@@ -3,14 +3,58 @@ let responseContentOne = document.createElement("button");
 let responseContentTwo = document.createElement("button");
 let responseContentThree = document.createElement("button");
 let timeLeft = 60;
+let highScore = 0;
+var timeInterval;
+let i = 0;
 
-var rightAnswer = function () {
-  document.querySelector(".right-wrong").innerHTML = "Correct!";
-};
+let questionsArray = [
+  {
+    questionPrompt: "Inside which HTML element do we put the JavaScript?",
+    answers: ["<js>", "<script>", "<javascript>"],
+    right: "<script>",
+  },
+  {
+    questionPrompt:
+      "What is the correct way to connect an external js file to an HTML file",
+    answers: [
+      "<script src='....js'>",
+      "<script href='....js'>",
+      "<script name='....js'>",
+    ],
+    right: "<script src='....js'>",
+  },
+  {
+    questionPrompt: "How do you write 'Hello World' in an alert box?",
+    answers: [
+      "prompt('Hello World')",
+      "confirm('Hello World')",
+      "alert('Hello World')",
+    ],
+    right: "alert('Hello World')",
+  },
+  {
+    questionPrompt:
+      "All 'for' and 'while' loops can be expressed as a recursive function with an if statement?",
+    answers: ["True", "False", "Only 'for' loops"],
+    right: "True",
+  },
+  {
+    questionPrompt: "What will be the output of: console.log(5 + '6' + '4')?",
+    answers: ["114", "15", "564"],
+    right: "564",
+  },
+];
 
-var wrongAnswer = function () {
-  document.querySelector(".right-wrong").innerHTML = "Wrong!";
-  timeLeft = timeLeft - 10;
+var answerCheck = function () {
+  if (this.textContent === questionsArray[i].right) {
+    document.querySelector(".right-wrong").innerHTML = "Correct!";
+  } else {
+    document.querySelector(".right-wrong").innerHTML = "Wrong!";
+    timeLeft = timeLeft - 10;
+  }
+  console.log(this.textContent);
+  console.log(questionsArray[i].right);
+  i++;
 };
 
 function eventsAndButtons(answerA, answerB, answerC) {
@@ -33,91 +77,94 @@ function removeButtons() {
 
 var questionOne = function () {
   document.querySelector("#question-title").innerHTML =
-    "What is the correct way to connect an external js file to an HTML file";
+    questionsArray[0].questionPrompt;
 
-  eventsAndButtons("<js>", "<script>", "<javascript>");
+  eventsAndButtons(
+    questionsArray[0].answers[0],
+    questionsArray[0].answers[1],
+    questionsArray[0].answers[2]
+  );
+  console.log(responseContentOne.textContent);
+  console.log(responseContentTwo.textContent);
+  console.log(responseContentThree.textContent);
 
   document.querySelector(".a").addEventListener("click", questionTwo);
   document.querySelector(".b").addEventListener("click", questionTwo);
   document.querySelector(".c").addEventListener("click", questionTwo);
-  document.querySelector(".a").addEventListener("click", wrongAnswer);
-  document.querySelector(".b").addEventListener("click", rightAnswer);
-  document.querySelector(".c").addEventListener("click", wrongAnswer);
+  document.querySelector(".a").addEventListener("click", answerCheck);
+  document.querySelector(".b").addEventListener("click", answerCheck);
+  document.querySelector(".c").addEventListener("click", answerCheck);
 };
 
 var questionTwo = function () {
   document.querySelector("#question-title").innerHTML =
-    "What is the correct way to connect an external js file to an HTML file";
+    questionsArray[1].questionPrompt;
 
   removeButtons();
   eventsAndButtons(
-    "<script src='....js'>",
-    "<script href='....js'>",
-    "<script name='....js'>"
+    questionsArray[1].answers[0],
+    questionsArray[1].answers[1],
+    questionsArray[1].answers[2]
   );
 
   document.querySelector(".a").addEventListener("click", questionThree);
   document.querySelector(".b").addEventListener("click", questionThree);
   document.querySelector(".c").addEventListener("click", questionThree);
-  document.querySelector(".a").addEventListener("click", rightAnswer);
-  document.querySelector(".b").addEventListener("click", wrongAnswer);
-  document.querySelector(".c").addEventListener("click", wrongAnswer);
 };
 
 var questionThree = function () {
   document.querySelector("#question-title").innerHTML =
-    "How do you write 'Hello World' in an alert box?";
+    questionsArray[2].questionPrompt;
 
   removeButtons();
   eventsAndButtons(
-    "prompt('Hello World')",
-    "confirm('Hello World')",
-    "alert('Hello World')"
+    questionsArray[2].answers[0],
+    questionsArray[2].answers[1],
+    questionsArray[2].answers[2]
   );
 
   document.querySelector(".a").addEventListener("click", questionFour);
   document.querySelector(".b").addEventListener("click", questionFour);
   document.querySelector(".c").addEventListener("click", questionFour);
-  document.querySelector(".a").addEventListener("click", wrongAnswer);
-  document.querySelector(".b").addEventListener("click", wrongAnswer);
-  document.querySelector(".c").addEventListener("click", rightAnswer);
 };
 
 var questionFour = function () {
   document.querySelector("#question-title").innerHTML =
-    "All 'for' and 'while' loops can be expressed as a recursive function with an if statement?";
+    questionsArray[3].questionPrompt;
 
   removeButtons();
-  eventsAndButtons("True", "False", "Only 'for' loops");
+  eventsAndButtons(
+    questionsArray[3].answers[0],
+    questionsArray[3].answers[1],
+    questionsArray[3].answers[2]
+  );
 
   document.querySelector(".a").addEventListener("click", questionFive);
   document.querySelector(".b").addEventListener("click", questionFive);
   document.querySelector(".c").addEventListener("click", questionFive);
-  document.querySelector(".a").addEventListener("click", rightAnswer);
-  document.querySelector(".b").addEventListener("click", wrongAnswer);
-  document.querySelector(".c").addEventListener("click", wrongAnswer);
 };
 
 var questionFive = function () {
   document.querySelector("#question-title").innerHTML =
-    "What will be the output of: console.log(5 + '6' + '4')?";
+    questionsArray[4].questionPrompt;
 
   removeButtons();
-  eventsAndButtons("114", "15", "564");
+  eventsAndButtons(
+    questionsArray[4].answers[0],
+    questionsArray[4].answers[1],
+    questionsArray[4].answers[2]
+  );
 
   document.querySelector(".a").addEventListener("click", endQuiz);
   document.querySelector(".b").addEventListener("click", endQuiz);
   document.querySelector(".c").addEventListener("click", endQuiz);
-  document.querySelector(".a").addEventListener("click", wrongAnswer);
-  document.querySelector(".b").addEventListener("click", wrongAnswer);
-  document.querySelector(".c").addEventListener("click", rightAnswer);
 };
 
 function countdown() {
   document.querySelector("#explanation").remove();
   document.querySelector("#start").remove();
 
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     timerEl.textContent = "Time: " + timeLeft;
     if (timeLeft <= 0) {
       clearInterval(timeInterval);
@@ -127,12 +174,15 @@ function countdown() {
     timeLeft--;
   }, 1000);
   questionOne();
+  // highScore = timeLeft;
+  // endQuiz();
 }
 
 function endQuiz() {
-  let highScore = timeLeft;
+  highScore = timeLeft;
+  clearInterval(timeInterval);
   removeButtons();
-  if (highScore >= 0) {
+  if (highScore > 0) {
     document.querySelector("#question-title").innerHTML =
       "You reached a score of " + highScore;
   } else {
