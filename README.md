@@ -4,7 +4,9 @@ https://chris-backes.github.io/code-quiz/
 
 ![Code Quiz Screenshot](./assets/images/screencapture.png)
 
-![Code Quiz Gif](./assets/images/code-quiz.gif)
+<p align="center">
+<img alt="gif of webpage" src="./assets/images/code-quiz.gif" />
+</p>
 
 ## User Story
 
