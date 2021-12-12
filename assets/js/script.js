@@ -2,6 +2,10 @@ let timerEl = document.querySelector("#countdown");
 let responseContentOne = document.createElement("button");
 let responseContentTwo = document.createElement("button");
 let responseContentThree = document.createElement("button");
+let saveScoreFormEl = document.createElement("form");
+let saveScoreLabelEl = document.createElement("label");
+let saveScoreInputEl = document.createElement("input");
+let saveScoreSubmitEl = document.createElement("input");
 let timeLeft = 60;
 let highScore = 0;
 var timeInterval;
@@ -52,8 +56,6 @@ var answerCheck = function () {
     document.querySelector(".right-wrong").innerHTML = "Wrong!";
     timeLeft = timeLeft - 10;
   }
-  console.log(this.textContent);
-  console.log(questionsArray[i].right);
   i++;
 };
 
@@ -65,7 +67,7 @@ function eventsAndButtons(answerA, answerB, answerC) {
   document.querySelector("#prompt").appendChild(responseContentTwo);
   document.querySelector("#prompt").appendChild(responseContentThree);
   responseContentOne.setAttribute("class", "btn a");
-  responseContentTwo.setAttribute("class", "btn b ");
+  responseContentTwo.setAttribute("class", "btn b");
   responseContentThree.setAttribute("class", "btn c");
 }
 
@@ -84,16 +86,13 @@ var questionOne = function () {
     questionsArray[0].answers[1],
     questionsArray[0].answers[2]
   );
-  console.log(responseContentOne.textContent);
-  console.log(responseContentTwo.textContent);
-  console.log(responseContentThree.textContent);
 
-  document.querySelector(".a").addEventListener("click", questionTwo);
-  document.querySelector(".b").addEventListener("click", questionTwo);
-  document.querySelector(".c").addEventListener("click", questionTwo);
   document.querySelector(".a").addEventListener("click", answerCheck);
   document.querySelector(".b").addEventListener("click", answerCheck);
   document.querySelector(".c").addEventListener("click", answerCheck);
+  document.querySelector(".a").addEventListener("click", questionTwo);
+  document.querySelector(".b").addEventListener("click", questionTwo);
+  document.querySelector(".c").addEventListener("click", questionTwo);
 };
 
 var questionTwo = function () {
@@ -159,7 +158,72 @@ var questionFive = function () {
   document.querySelector(".b").addEventListener("click", endQuiz);
   document.querySelector(".c").addEventListener("click", endQuiz);
 };
+//Quiz is over. This function starts the process of building the high score screen
+function endQuiz() {
+  highScore = timeLeft;
+  clearInterval(timeInterval);
+  removeButtons();
+  if (highScore > 0) {
+    document.querySelector("#question-title").innerHTML =
+      "You reached a score of " + highScore + "!";
+  } else {
+    document.querySelector("#question-title").innerHTML =
+      "You did not complete the test.";
+  }
+  highScoreScreen();
+}
 
+function highScoreScreen() {
+  saveScoreFormEl.setAttribute("id", "high-score");
+  document.querySelector("#prompt").appendChild(saveScoreFormEl);
+
+  saveScoreLabelEl.textContent =
+    "Enter your initials below if you would like to save your score.";
+  saveScoreLabelEl.setAttribute("for", "initials");
+  saveScoreFormEl.appendChild(saveScoreLabelEl);
+
+  saveScoreInputEl.setAttribute("name", "initials");
+  saveScoreInputEl.setAttribute("id", "initials");
+  saveScoreInputEl.setAttribute("type", "text");
+  saveScoreInputEl.setAttribute("class", "text-field");
+  saveScoreFormEl.appendChild(saveScoreInputEl);
+
+  saveScoreSubmitEl.setAttribute("type", "submit");
+  saveScoreSubmitEl.setAttribute("value", "Save Score");
+  saveScoreSubmitEl.setAttribute("class", "btn");
+  saveScoreSubmitEl.setAttribute("onclick", "submitHighScore()");
+  saveScoreFormEl.appendChild(saveScoreSubmitEl);
+}
+
+function loadScores() {
+  let previousScores = localStorage.getItem("scores");
+  if (!previousScores) {
+    return false;
+  }
+  previousScores = JSON.parse(previousScores);
+  allScores.push(previousScores);
+  console.log(allScores);
+}
+
+function submitHighScore() {
+  debugger;
+  let allScores = [];
+  let newScore = [];
+  loadScores();
+  if (saveScoreInputEl === "") {
+    saveScoreLabelEl.textContent = "Maybe try entering your initials champ";
+  } else {
+    newScore = {
+      name: saveScoreInputEl.value,
+      score: highScore,
+    };
+    allScores.push(newScore);
+    localStorage.setItem("scores", JSON.stringify(allScores));
+    console.log(newScore);
+  }
+}
+
+//First function. Initiates quiz/timer
 function countdown() {
   document.querySelector("#explanation").remove();
   document.querySelector("#start").remove();
@@ -174,19 +238,4 @@ function countdown() {
     timeLeft--;
   }, 1000);
   questionOne();
-  // highScore = timeLeft;
-  // endQuiz();
-}
-
-function endQuiz() {
-  highScore = timeLeft;
-  clearInterval(timeInterval);
-  removeButtons();
-  if (highScore > 0) {
-    document.querySelector("#question-title").innerHTML =
-      "You reached a score of " + highScore;
-  } else {
-    document.querySelector("#question-title").innerHTML =
-      "Bro... You kinda suck";
-  }
 }

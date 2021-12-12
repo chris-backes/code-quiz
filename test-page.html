@@ -17,17 +17,22 @@
     </header>
     <main>
       <section class="question" id="prompt">
-        <h1>Inside which HTML element do we put the JavaScript?</h1>
-        <button class="btn" id="wrong" onclick="quiz()">&lt;js&gt;</button>
-        <button class="btn" id="correct" onclick="quiz()">
-          &lt;script&gt;
-        </button>
-        <button class="btn" id="wrong" onclick="quiz()">
-          &lt;javascript&gt;
-        </button>
+        <h1 id="question-title">You reached a score of 57!</h1>
+        <form id="high-score">
+          <label for="initials"
+            >Enter your initials below if you would like to save your
+            score.</label
+          ><input
+            name="initials"
+            id="initials"
+            type="text"
+            class="text-field"
+          />
+          <input type="submit" value="Save Score" class="btn" />
+        </form>
       </section>
-      <section class="right-wrong" id="right-wrong">
-        <p>Correct!</p>
+      <section id="right-wrong">
+        <p class="right-wrong">Correct!</p>
       </section>
     </main>
     <script src="./assets/js/script.js"></script>
