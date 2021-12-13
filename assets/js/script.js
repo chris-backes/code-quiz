@@ -12,6 +12,7 @@ var timeInterval;
 let i = 0;
 let allScores = [];
 
+//The questions used in the course of the quiz. Each function pulls the questions from this array of objects.
 let questionsArray = [
   {
     questionPrompt: "Inside which HTML element do we put the JavaScript?",
@@ -50,6 +51,8 @@ let questionsArray = [
   },
 ];
 //functions used in the course of creating and styling the quiz questions
+//checks to see if answer is correct by comparing with the string stored in the "right" property of the object.
+//Shares features of an iterative loop with the i++, but is not the same, since it is not recursive.
 var answerCheck = function () {
   if (this.textContent === questionsArray[i].right) {
     document.querySelector(".right-wrong").innerHTML = "Correct!";
@@ -59,7 +62,7 @@ var answerCheck = function () {
   }
   i++;
 };
-
+//creatings the buttons for each question
 function eventsAndButtons(answerA, answerB, answerC) {
   responseContentOne.textContent = answerA;
   responseContentTwo.textContent = answerB;
@@ -71,6 +74,7 @@ function eventsAndButtons(answerA, answerB, answerC) {
   responseContentTwo.setAttribute("class", "btn b");
   responseContentThree.setAttribute("class", "btn c");
 }
+//Removes the buttons for the next question.
 //Is only called after question one becasue there is nothing to remove when question one is called
 function removeButtons() {
   responseContentOne.remove();
@@ -190,6 +194,7 @@ function endQuiz() {
   highScoreScreen();
 }
 
+//restyles the page after the last question for user to submit the score
 function highScoreScreen() {
   saveScoreFormEl.setAttribute("id", "high-score");
   document.querySelector("#prompt").appendChild(saveScoreFormEl);
@@ -212,6 +217,8 @@ function highScoreScreen() {
   saveScoreFormEl.appendChild(saveScoreSubmitEl);
 }
 
+//Checks if local storage already has scores and pulls them into an array if there are any scores
+// Is called by an onclick attribute
 function submitHighScore() {
   function loadScores() {
     let previousScores = JSON.parse(localStorage.getItem("scores"));
@@ -222,7 +229,7 @@ function submitHighScore() {
       allScores.push(previousScores[j]);
     }
   }
-
+  //Adds the score of the recent roud to local storage
   loadScores();
   function logScores() {
     if (saveScoreInputEl.value === "") {
@@ -237,7 +244,6 @@ function submitHighScore() {
       localStorage.setItem("scores", JSON.stringify(allScores));
       //directs user to high score page
       window.location.href = "./highScores.html";
-      // styleScorePage();
     }
   }
   logScores();
