@@ -58,7 +58,7 @@ var answerCheck = function () {
     document.querySelector(".right-wrong").innerHTML = "Correct!";
   } else {
     document.querySelector(".right-wrong").innerHTML = "Wrong!";
-    timeLeft = timeLeft - 10;
+    timeLeft = timeLeft - 15;
   }
   i++;
 };

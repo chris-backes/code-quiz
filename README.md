@@ -1,5 +1,7 @@
 # Code Quiz
 
+Code Quiz is a project which provides five JavaScript related questions to test one's knowledge of the fundamentals. It is a timed event. Once the user clocks the button, that person will have 60 seconds to complete the task. Wrong answers will have 15 seconds deducted from the clock. Once finished, either by completing it or having time deducted, the user can input initials to store the score, and the site loads a secondary page where the high scores are displayed.
+
 ## Website
 
 https://chris-backes.github.io/code-quiz/
@@ -54,17 +56,17 @@ At the bottom of the sheet is the styling for the elements unique to the second 
 
 ### JavaScript
 
-The Javascript is composed of functions which are called in succession after the user hits the start button. The start button calls the function throug onclick, while the remaining buttons use and addEventListener
+The JavaScript is composed of functions which are called in succession after the user hits the start button. The start button calls the function through onclick, while the remaining buttons use and addEventListener
 
 The first function starts a timer and calls the first question. The three buttons populating the first question each call a function to check the answer, as well as call the next question. This is repeated until the fifth question, after which the function dynamically creating the end game content is called.
 
-The high score page introduces a form for inputing initials. These initials will be stored with the score itself in the local storage.
+The high score page introduces a form for inputting initials. These initials will be stored with the score itself in the local storage.
 
 The scoring page is displayed on a second page, which is linked both in the upper left of the index and is automatically produced upon completing the form submitting the score. The contents of the page are a table of all the scores stored in local storage.
 
 ## Final Remarks
 
-Some of the JavaScript code is clunkier than it needs to be. Expecially with the questions, this was borne of the fact that I had originally intended to replace the event listeners each question (which had also originally called different functions depending on whether the response was correct or not). Since the eventlisterners were not being removed by the removeEventListener fucntion, I then tried to remove the button completely and re-add them. The event listerner still remained, so the code had to be re-written. As it stands, the question can be reworked to work as a single function in a recurisve loop after the elements have been put in place. Would that time were more on my side to do so.
+Some of the JavaScript code is clunkier than it needs to be. Especially with the questions, this was borne of the fact that I had originally intended to replace the event listeners each question (which had also originally called different functions depending on whether the response was correct or not). Since the event listeners were not being removed by the removeEventListener function, I then tried to remove the button completely and re-add them. The event listener still remained, so the code had to be re-written. As it stands, the question can be reworked to work as a single function in a recursive loop after the elements have been put in place. Would that time were more on my side to do so.
 
 The Local Storage function can have a variable reduced out in some fashion, but in the course of testing, attempts at doing so produced varied and incorrect results.
 
