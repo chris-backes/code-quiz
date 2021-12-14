@@ -165,17 +165,25 @@ var questionFive = function () {
 };
 //Styles the scoring page, which automatically opens once the initials are entered
 function styleScorePage() {
+  let allScoresArray = [];
   allScores = JSON.parse(localStorage.getItem("scores"));
-  console.log(allScores);
+
   for (let j = 0; j < allScores.length; j++) {
+    allScoresArray.push([allScores[j].name, allScores[j].score]);
+  }
+  allScoresArray.sort(function (a, b) {
+    return b[1] - a[1];
+  });
+
+  for (let j = 0; j < allScoresArray.length; j++) {
     let tableEl = document.querySelector("#page-scores");
     let tableRowEl = document.createElement("tr");
     let tableHeadOneEl = document.createElement("th");
     let tableHeadTwoEl = document.createElement("th");
     tableEl.appendChild(tableRowEl);
-    tableHeadOneEl.textContent = allScores[j].name;
+    tableHeadOneEl.textContent = allScoresArray[j][0];
     tableRowEl.appendChild(tableHeadOneEl);
-    tableHeadTwoEl.textContent = allScores[j].score;
+    tableHeadTwoEl.textContent = allScoresArray[j][1];
     tableRowEl.appendChild(tableHeadTwoEl);
   }
 }

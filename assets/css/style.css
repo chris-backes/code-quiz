@@ -39,8 +39,11 @@ main {
 .question {
   color: var(--color2);
 }
-.question h1 {
+h1 {
   text-align: center;
+  font-size: 200%;
+  /* Need this to style h1 on second page */
+  color: var(--color2);
 }
 .question p {
   text-align: justify;
@@ -98,7 +101,7 @@ input {
 
 /* styling for high score page */
 tr {
-  font-size: 250%;
+  font-size: 200%;
   color: var(--color2);
 }
 tr:nth-child(even) {

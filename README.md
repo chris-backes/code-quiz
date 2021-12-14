@@ -62,7 +62,7 @@ The first function starts a timer and calls the first question. The three button
 
 The high score page introduces a form for inputting initials. These initials will be stored with the score itself in the local storage.
 
-The scoring page is displayed on a second page, which is linked both in the upper left of the index and is automatically produced upon completing the form submitting the score. The contents of the page are a table of all the scores stored in local storage.
+The scoring page is displayed on a second page, which is linked both in the upper left of the index and is automatically produced upon completing the form submitting the score. The contents of the page are a table of all the scores stored in local storage. The local storage array of objects is converted into an array of arras so that I can order them from greatest to least.
 
 ## Final Remarks
 
@@ -71,5 +71,3 @@ Some of the JavaScript code is clunkier than it needs to be. Especially with the
 The Local Storage function can have a variable reduced out in some fashion, but in the course of testing, attempts at doing so produced varied and incorrect results.
 
 The concision of the styleScorePage function intimates at least the former improvement that could be made.
-
-Early on, I had envisioned the scoring to be ordered from greatest to least, but I cannot, so far as I know, order objects by one of their respective property values.
